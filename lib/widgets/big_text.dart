@@ -1,14 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class BigText extends StatelessWidget {
   final String text;
   Color? color;
-  double size;
+  double? size;
   TextOverflow overflow;
   BigText(
       {super.key,
       required this.text,
-      this.size = 20,
+      this.size,
       this.overflow = TextOverflow.ellipsis,
       this.color = const Color(0xFF332d2b)});
 
@@ -19,7 +20,7 @@ class BigText extends StatelessWidget {
       style: TextStyle(
         color: color,
         fontWeight: FontWeight.w400,
-        fontSize: size,
+        fontSize: size == 0 ? 20.sp : size,
         overflow: overflow,
       ),
     );

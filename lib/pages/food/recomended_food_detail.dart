@@ -1,18 +1,25 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:food_delivery/controllers/recomended_products_controllers.dart';
 import 'package:food_delivery/routes/routes_helper.dart';
 import 'package:food_delivery/utils/colors.dart';
 import 'package:food_delivery/widgets/app_icon.dart';
 import 'package:food_delivery/widgets/big_text.dart';
 import 'package:food_delivery/widgets/small_text.dart';
+import 'package:get/get.dart';
 import 'package:get/get_core/src/get_main.dart';
 import 'package:get/get_navigation/get_navigation.dart';
 
+import '../../utils/app_constant.dart';
+
 class RecomendedFoodDetail extends StatelessWidget {
-  const RecomendedFoodDetail({super.key});
+  int pageId;
+  RecomendedFoodDetail({super.key, required this.pageId});
 
   @override
   Widget build(BuildContext context) {
+    var product =
+        Get.find<RecomendedProductsController>().recomendedProductList[pageId];
     return Scaffold(
       body: CustomScrollView(
         slivers: [
@@ -54,14 +61,14 @@ class RecomendedFoodDetail extends StatelessWidget {
                       color: Colors.white),
                   child: Center(
                     child: BigText(
-                      text: 'Chinese Side',
+                      text: product.name,
                       size: 26.sp,
                     ),
                   ),
                 )),
             flexibleSpace: FlexibleSpaceBar(
-              background: Image.asset(
-                'assets/image/food0.png',
+              background: Image.network(
+                AppConstant.BASE_URL + '/uploads/' + product.img,
                 width: double.maxFinite,
                 fit: BoxFit.cover,
               ),
@@ -71,8 +78,7 @@ class RecomendedFoodDetail extends StatelessWidget {
             child: Padding(
               padding: EdgeInsets.only(left: 20.w, right: 20.w),
               child: SmallText(
-                text:
-                    'Biryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or iryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or goiryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or gogoBiryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or iryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or goiryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or gogoBiryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or iryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or goiryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or gogoBiryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or iryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or goiryani is a flavorful and aromatic South Asian dish made with basmati rice,iryani is a flavorful and aromatic South Asian dish made with basmati rice, meat (such as chicken, mutton, beef, or gogo',
+                text: product.description,
                 size: 16.sp,
               ),
             ),
@@ -95,7 +101,7 @@ class RecomendedFoodDetail extends StatelessWidget {
                   iconSize: 24.h,
                 ),
                 BigText(
-                  text: '\$ 12.88 X 0 ',
+                  text: '\$ ${product.price} X 0 ',
                   size: 26.sp,
                 ),
                 AppIcon(
@@ -151,7 +157,7 @@ class RecomendedFoodDetail extends StatelessWidget {
                     ),
                   ),
                   child: BigText(
-                    text: '10\$ | Add to Cart',
+                    text: '${product.price} \$ | Add to Cart',
                     color: Colors.white,
                   ),
                 ),

@@ -57,7 +57,8 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                     itemBuilder: (context, position) {
                       return GestureDetector(
                         onTap: () {
-                          Get.toNamed(RoutesHelper.getPopularFoodPage());
+                          Get.toNamed(
+                              RoutesHelper.getPopularFoodPage(position));
                         },
                         child: _buildPageItem(position,
                             popularProducts.popularProductList[position]),
@@ -134,7 +135,7 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                   ) {
                     return GestureDetector(
                       onTap: () {
-                        Get.toNamed(RoutesHelper.getRecommendedFoodPage());
+                        Get.toNamed(RoutesHelper.getRecommendedFoodPage(index));
                       },
                       child: Container(
                         margin: EdgeInsets.only(
@@ -196,10 +197,13 @@ class _FoodPageBodyState extends State<FoodPageBody> {
                                       SizedBox(
                                         height: 10.h,
                                       ),
-                                      SmallText(
-                                        text: recommendedProduct
+                                      Text(
+                                        recommendedProduct
                                             .recomendedProductList[index]
                                             .description,
+                                        style: TextStyle(
+                                            color: AppColors.paraColor,
+                                            overflow: TextOverflow.ellipsis),
                                       ),
                                       SizedBox(
                                         height: 10.h,
